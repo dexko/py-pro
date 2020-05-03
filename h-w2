@@ -1,0 +1,86 @@
+#1
+#1.1
+
+data = [
+    {'name': 'Viktor', 'city': 'Kiev', 'age': 30 },
+    {'name': 'Maksim', 'city': 'Dnepr', 'age': 20},
+    {'name': 'Vladimir', 'city': 'Lviv', 'age': 32},
+    {'name': 'Andrey', 'city': 'Kiev', 'age': 34},
+    {'name': 'Artem', 'city': 'Dnepr', 'age': 50},
+    {'name': 'Dmitriy', 'city': 'Lviv', 'age': 21}]
+data.sort(key=lambda d: d['age'])
+print (t)
+
+#1.2
+
+data = [
+    {'name': 'Viktor', 'city': 'Kiev', 'age': 30 },
+    {'name': 'Maksim', 'city': 'Dnepr', 'age': 20},
+    {'name': 'Vladimir', 'city': 'Lviv', 'age': 32},
+    {'name': 'Andrey', 'city': 'Kiev', 'age': 34},
+    {'name': 'Artem', 'city': 'Dnepr', 'age': 50},
+    {'name': 'Dmitriy', 'city': 'Lviv', 'age': 21}]
+    data.sort(key=lambda x:x['city'][:6])
+    data
+from itertools import groupby
+for k,v in groupby(data,key=lambda x:x['city'][:6]):
+result=(k, list(v))
+
+print(result)
+
+#2
+
+  string=input(["str"])
+def Convert(string):
+    li = list(string.split(" "))
+    return li
+s=Convert(string)
+di = {}
+def most_frequent(list_var):
+    for word in s:
+            if word in di.keys():
+                di[word] += 1
+            else:
+                di[word] = 1
+                key = max(di, key=di.get)
+    return(key)
+print (most_frequent(s))
+
+#3
+
+n=input
+mult=1
+for i in n:
+ if '1'<=i<='9':
+  if int(i)!=0
+   mult*=int(i)
+   Print('multiple:', mult)
+
+#4
+
+number=input(["integer2"])
+array = [1,0,2,3,4,5,6,7,8,9]
+def index_power(array, number):
+
+    if int(number) <= len(array) and array[int(number)]!=0:
+        tt=array[int(number)]**int(number)
+    else:
+        tt=-1
+    return tt
+print(index_power(array,number))
+
+#5
+
+words=input(["string"])
+def m (words) :
+    count = 0
+    for w in words.split() :
+        if w.isalpha() :
+            count += 1
+            if count == 3 :
+               return True
+        else :
+            count = 0
+
+    return False
+print (m(words) "result")
