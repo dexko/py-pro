@@ -29,14 +29,10 @@ def context_manager_for_dirchange (path, *suppressed):
     saved_cwd = os.getcwd()
     try:
         os.chdir(path)
-
-    except (suppressed is not None) and issubclass(exc_type, *suppressed):
-        pass
-
-    try:
         yield
-    finally:
-        os.chdir(saved_cwd)
+    except suppressed as exc:
+        pass
+    finally: os.chdir(saved_cwd)
 
 with context_manager_for_dirchange ('/Users', NameError):
     print(os.getcwd())
