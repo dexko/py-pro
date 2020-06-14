@@ -1,0 +1,67 @@
+#1
+import os
+
+class Manager_for_dirchange:
+    """This context manager is able to change cwd and suppress the error that was given"""
+    def __init__(self, path, *suppressed):
+        self.path = path
+        self.__suppressed = suppressed
+
+    def __enter__(self):
+        self.saved_cwd = os.getcwd()
+        os.chdir(self.path)
+
+    def __exit__(self, exc_type, exc_value, tb):
+        os.chdir(self.saved_cwd)
+        return exc_type is not None and issubclass(exc_type, self.__suppressed)
+
+
+with Manager_for_dirchange('/Users', AttributeError) as inputdir:
+    print(inputdir.cwd)
+    print(os.getcwd())
+
+#2
+from contextlib import contextmanager
+from contextlib import suppress
+import os
+@contextmanager
+def context_manager_for_dirchange (path, *suppressed):
+    saved_cwd = os.getcwd()
+    try:
+        os.chdir(path)
+
+    except (suppressed is not None) and issubclass(exc_type, *suppressed):
+        pass
+
+    try:
+        yield
+    finally:
+        os.chdir(saved_cwd)
+
+with context_manager_for_dirchange ('/Users', NameError):
+    print(os.getcwd())
+
+#3
+from timeit import default_timer as timer
+
+
+class Timecounter_for_funktion(object):
+    """Contecst manager for counting time of function's executing"""
+
+    def __init__(self, funk, fmt="%0.3g"):
+        self.funk = funk
+        self.fmt = fmt
+
+    def __enter__(self):
+        self.start = timer()
+        return self
+
+    def __exit__(self, *args):
+        t = timer() - self.start
+        print(("%s : " + self.fmt + " seconds") % (self.funk, t))
+        self.time = t
+
+def senora (a):
+    return a+5
+with Timecounter_for_funktion(senora(1111)) as t:
+    print(t)
